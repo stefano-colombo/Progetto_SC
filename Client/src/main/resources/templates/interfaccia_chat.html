@@ -1,0 +1,58 @@
+
+<!DOCTYPE html>
+<html lang="">
+<head>
+    <title th:value="${@environment.getProperty('custom.mittente')}"></title>
+	<link href="/css/stile_interfaccia_chat.css" rel="stylesheet" type="text/css">
+	<link href="../static/css/stile_interfaccia_chat.css" rel="stylesheet" type="text/css">
+</head>
+ 
+<body>
+	<form id="dialogueForm" th:action="@{/messaggio}"  method="post" th:object="${messaggio}">
+		<input type="hidden"  th:value="messaggio" name="tipo">
+		<input type="hidden"  th:value="${nome}" name="mittente" id="nome">
+		
+		<div id="sfondo">
+			<div id="contenitore">
+				<div id="barra_superiore" ><span th:text="${nome}" id="nome">Nome<span></div>
+
+				<div id="lista_messaggi"  th:if="${messaggi != null}" >
+
+						<div  th:each="m:${messaggi}" class="contenitore-messaggio">
+							<div  th:if="${m.mittente.trim() != nome.trim()}" class="messaggio">
+								<div class="mittente" th:text="${m.mittente}" >ste</div>
+								<div class="testo"  th:text="${m.contenuto}">messaggio1</div>
+							</div>
+				
+							<div  th:if="${m.mittente.trim() == nome.trim()}"  class="messaggio-mio" >
+								<div class="mittente-mio" th:text="${m.mittente}" >fabio</div>
+								<div class="testo"  th:text="${m.contenuto}">messaggio2</div>
+							</div>
+						</div>
+					
+					
+				</div>	
+
+
+				<div id="barra_inferiore" >
+					<input type="text" placeholder="scrivi un messaggio" name="contenuto" id="chatMessage">
+					<input type="submit" value="" id="pulsante_invia" >
+				</div>
+			</div>
+		</div>
+	</form>
+
+	<script th:src="@{/webjars/sockjs-client/1.1.2/sockjs.js}" type="text/javascript"></script>
+	<script th:src="@{/webjars/stomp-websocket/2.3.3-1/stomp.js}" type="text/javascript"></script>
+        
+	<script>
+		/*<![CDATA[*/
+		var username = " [[${nome}]] ";
+		/*]]>*/
+	</script>
+	<script type="text/javascript"script src="/js/chat.js"></script>
+
+</body>
+</html>
+
+

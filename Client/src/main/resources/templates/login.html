@@ -1,0 +1,38 @@
+
+<!DOCTYPE html>
+<html >
+    <head>
+        <title>desktop</title>
+        <link href="/css/stile_loggin.css" rel="stylesheet" type="text/css">
+        <link href="../static/css/stile_loggin.css" rel="stylesheet" type="text/css">
+        
+    </head>
+    
+    <body>
+        <form th:action="@{/chat}"  method="post" th:object="${messaggio}" >
+        <div id="sfondo">
+            <div id="contenitore">
+
+                    <div id="frase_di_presentazione">Login</div>
+                    <div id="descrizione">Nome:</div>
+               
+                    <div id="box_nome"><input type="text" placeholder="scrivi il tuo nome qui" name="mittente" id="box_text"></div>
+                    <div>
+                        <input type="hidden"  th:value="messaggio" name="tipo">
+                        <input type="hidden"  th:value="vuoto" name="nome">
+                        <input type="hidden"  th:value="vuoto" name="estensione">
+                        <input type="hidden"  th:value="vuoto" name="link">
+                    </div>
+
+                    <div id="pulsante_invia"><input type="submit" value="login" id="btn"></div> 
+                
+                    <div id="icona_messaggio"> </div>
+
+            </div>
+
+        </div>
+        </form>
+    </body>
+</html>
+
+
