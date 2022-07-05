@@ -1,0 +1,3 @@
+FROM openjdk
+COPY client.jar /
+CMD ["java","-jar","client.jar"]

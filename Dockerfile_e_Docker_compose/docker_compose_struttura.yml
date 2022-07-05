@@ -1,0 +1,48 @@
+version: '3'  # requires Docker Compose 1.13 or later
+
+services:
+  rabbitmq:
+    image: 'stecol/rabbitmq'
+    ports:
+      - '5672:5672'     # The standard AMQP protocol port
+      - '15672:15672'   # HTTP management UI (guest:guest)
+      - '61613:61613'
+
+  mariadb:
+    image: mariadb:latest
+    ports:
+      - "3306:3306"
+    volumes:
+      - db-data:/var/lib/mysql/
+    environment:
+      - MYSQL_ROOT_PASSWORD=1234
+      - MYSQL_DATABASE=chat
+      - MYSQL_USER=stefano
+      - MYSQL_PASSWORD=ste
+
+  client:
+    image: 'stecol/client_spring_boot:latest'
+    ports:
+      - "8080:8080"
+    depends_on:
+      - "mariadb"
+      - "rabbitmq"
+    environment:
+      - SERVER_PORT=8080
+      - SPRING_DATASOURCE_URL=jdbc:mysql://mariadb/chat
+      - RABBIT_INDIRIZZO=rabbitmq
+
+  server:
+    image: 'stecol/server_spring_boot:latest'
+    ports:
+      - "8081:8080"
+    depends_on:
+      - "mariadb"
+      - "rabbitmq"
+    environment:
+      - SERVER_PORT=8080
+      - SPRING_DATASOURCE_URL=jdbc:mysql://mariadb/chat
+      - RABBIT_INDIRIZZO=rabbitmq
+
+volumes:
+  db-data:
