@@ -28,15 +28,15 @@ Per inviare un messaggio l’utente1 invia un messaggio(1); il frontend invia il
 [3]Collegarsi al master.
 
 [4]Installare il tool "Kompose".
-
+```
 wget https://github.com/kubernetes/kompose/releases/download/v1.26.1/kompose_amd64.deb
 sudo apt install ./kompose_1.26.1_amd64.deb
-
+```
 [5]Inizializzazione del master, bisogna inizializzare il cluster. Per "IP_RETE_PRIVATA" si intende l’ip della subnet che è stato assegnato all VM.
-
+```
 sudo kubeadm init −−apiserver−advertise−address=IP_RETE_PRIVATA \
 −−pod−network−cidr=192.168.0.0/16
-
+```
 [6]Eseguire i comandi che l’output del comando precedente ci suggerisce di usare.
 
 mkdir −p $HOME/.kube
