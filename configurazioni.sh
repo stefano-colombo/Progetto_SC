@@ -59,11 +59,11 @@ EOF
 ls -ltr /etc/apt/sources.list.d/kubernetes.list
 sudo apt-get update -y
 
-# Installare Kubernetes kubeadm, kubelet and kubectl
+# installare Kubernetes kubeadm, kubelet and kubectl
 echo "[TASK 9] Installare Kubernetes kubeadm, kubelet and kubectl"
 sudo apt-get install -y kubelet=$KVERS kubeadm=$KVERS kubectl=$KVERS
 
-# Abilitare start kubelet service"
+# abilitare start kubelet service"
 echo "[TASK 10] Abilitare start kubelet service"
 sudo systemctl enable kubelet >/dev/null 2>&1
 sudo systemctl start kubelet >/dev/null 2>&1
