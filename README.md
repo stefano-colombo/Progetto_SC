@@ -38,48 +38,48 @@ sudo kubeadm init −−apiserver−advertise−address=IP_RETE_PRIVATA \
 −−pod−network−cidr=192.168.0.0/16
 ```
 [6]Eseguire i comandi che l’output del comando precedente ci suggerisce di usare.
-
+```
 mkdir −p $HOME/.kube
 sudo rm −rf $HOME/.kube/config
 sudo cp −i /etc/kubernetes/admin.conf $HOME/.kube/config
 sudo chown $(id −u):$(id −g) $HOME/.kube/config
-
+```
 [7]Inviare il file calico.yaml alla macchina VM col comando scp eCreare la rete calico.
-
+```
 kubectl create −f calico.yaml
-
+```
 [8]Aggiungere un settaggio alla rete e riavviare i coredns per far funzionare la risoluzione
 dei nomi dei servizi.
-
+```
 kubectl set env daemonset/calico−node −n kube−system \
 IP_AUTODETECTION_METHOD=interface=eth0
 kubectl rollout restart deployments −n kube−system coredns
-
+```
 [9]Sportarci sul kworker dove dobbiamo eseguire il comando fornito in output dal comando
 precedente "kubeadm init" che ha una forma di questo tipo.
-
+```
 kubeadm join 10.1.1.10:6443 −−token 1fuuic.sdy3dyqxhn83ss4r \
 −−discovery−token−ca−cert−hash sha256:1dfeb1c6
-
+```
 [10]si invia sul master il file docker-compose. Si lancia il seguente comando che creerà un insieme di file .yaml .
-
+```
 kompose convert −f docker−compose.yaml
-
+```
 [11]Kompose crea quasi tutti i file in maniera perfetta, ma ha delle difficoltà per quanto riguarda i file dei volumi persistenti, quindi a questo punto utilizzare i file .yaml relativi ai volumi, presenti nella cartella file_ymal github. Ed infine si possono lanciare i deployment.
-
+```
 kubectl apply −f .
-
+```
 [12]Nel caso in cui si possano presentare problemi perche il frontend e il backend non riescono
 a risolvere i nomi dei servizi, utilizzare il seguente comando per eseguire il restart
 del servizi:
-
+```
 kubectl rollout restart deployments client kubectl rollout restart deployments
 server
-
+```
 Adesso l’applicazione risulta essere funzionante ma non è ancora raggiungibile
 dall’esterno; quindi, eseguiamo il seguente comando che permette all’utente di
 raggiungere l’interfaccia web con l’ip del kmaster alla porta 8080.
-
+```
 kubectl port−forward −−address IP_RETE_PRIVATA service/client 8080:8080
-
+```
 
