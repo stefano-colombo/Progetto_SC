@@ -83,13 +83,13 @@ raggiungere l’interfaccia web con l’ip del kmaster alla porta 8080.
 kubectl port−forward −−address IP_RETE_PRIVATA service/client 8080:8080
 ```
 
-##Schermate App
+## Schermate App
 
 
-###Login
+### Login
 ![alt text](https://github.com/stefano-colombo/Progetto_SC/blob/main/immagini_readme/interfaccia_login.png)
 
-###Chat 
+### Chat 
 ![alt text](https://github.com/stefano-colombo/Progetto_SC/blob/main/immagini_readme/interfaccia_chat.png)
 
 
