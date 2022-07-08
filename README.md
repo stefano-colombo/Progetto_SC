@@ -73,7 +73,7 @@ kubectl apply −f .
 a risolvere i nomi dei servizi, utilizzare il seguente comando per eseguire il restart
 del servizi:
 ```
-kubectl rollout restart deployments client kubectl rollout restart deployments
+kubectl rollout restart deployments client && kubectl rollout restart deployments
 server
 ```
 Adesso l’applicazione risulta essere funzionante ma non è ancora raggiungibile
