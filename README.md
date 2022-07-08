@@ -1,8 +1,10 @@
-# Chat multiutente eseguita su container docker, orchestrati da Kubernetes su macchine virtuali Azure 
+# Progetto_SC
+## Chat multiutente eseguita su container docker, orchestrati da Kubernetes su macchine virtuali Azure 
 
 
 Il progetto è composto da 4 container: un container Rabbitmq, per la creazione e la gestione delle code, utilizzate per l’invio di messaggi; un container Mariadb, per la memorizzazione dello storico della chat e due container OpenJDK che eseguono applicazioni Spring Boot che contengono la logica del funzionamento della chat.
 
+![alt text]()
 
 La configurazione di rete risulta essere molto semplice, si utilizzano due macchine virtuali Azure, una avrà il compito di Master e l’alta ospiterà i pod eseguendo il ruolo di worker (volendo si possono aggiungere tranquillamente anche altre VM worker); le VM sono situate all’interno della stessa subnet, così da poterle fare dialogare tranquillamente. Entrambe le macchine hanno un indirizzo IP pubblico necessario per permettere il collegamento da remoto, entrambe espongono la porta 22 per le connessione ssh e il kmaster in più espone anche la porta 8080 per fornire l’interfaccia web agli utenti.
 
