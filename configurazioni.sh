@@ -50,8 +50,8 @@ echo "[TASK 7] installare apt-transport-https pkg"
 sudo apt-get update && sudo apt-get install -y apt-transport-https 
 sudo curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
 
-# Add he kubernetes sources list into the sources.list directory 
-echo "[TASK 8] Add he kubernetes sources list"
+# aggiungere kubernetes sources list alla cartella sources.list  
+echo "[TASK 8] aggiungere kubernetes sources list"
 sudo cat <<EOF | sudo tee /etc/apt/sources.list.d/kubernetes.list
 deb https://apt.kubernetes.io/ kubernetes-xenial main
 EOF
@@ -59,12 +59,12 @@ EOF
 ls -ltr /etc/apt/sources.list.d/kubernetes.list
 sudo apt-get update -y
 
-# Install Kubernetes kubeadm, kubelet and kubectl"
-echo "[TASK 9] Add he kubernetes sources list"
+# Installare Kubernetes kubeadm, kubelet and kubectl
+echo "[TASK 9] Installare Kubernetes kubeadm, kubelet and kubectl"
 sudo apt-get install -y kubelet=$KVERS kubeadm=$KVERS kubectl=$KVERS
 
-# Enable and start kubelet service"
-echo "[TASK 10] Enable and start kubelet service"
+# Abilitare start kubelet service"
+echo "[TASK 10] Abilitare start kubelet service"
 sudo systemctl enable kubelet >/dev/null 2>&1
 sudo systemctl start kubelet >/dev/null 2>&1
 
